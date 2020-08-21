@@ -16,10 +16,10 @@
       - "stroom_url: {{ stroom_url }}"
     verbosity: 2
 
-- name: "See if {{ stroom_home_dir }} exists"
+- name: "See if {{ stroom_home_dir }}/bin exists"
   stat:
     path: "{{ stroom_home_dir }}"
-  register: _stroom_home_dir_info
+  register: _stroom_home_bin_dir_info
 
 - name: "Download archive {{ _stroom_stack_archive_url }}" 
   when: _stroom_home_dir_info.stat.exists == false
