@@ -25,30 +25,30 @@
   when: _stroom_home_dir_info.stat.exists == false
   block:
 
-    - name: Ensure directory {{ downloads_dir }} exists
+    - name: "Ensure directory {{ downloads_dir }} exists"
       file:
         path: "{{ downloads_dir }}"
         state: directory
 
-    - name: Download stroom distribution {{ stroom_url }}
+    - name: "Download stroom distribution {{ stroom_url }}"
       get_url:
         url: "{{ stroom_url }}"
         dest: "{{ downloads_dir }}/{{ stroom_archive_filename }}"
         checksum: "sha256:{{ stroom_url }}.sha256"
         timeout: 120
 
-    - name: Ensure install directory {{ stroom_home_dir }} exists
+    - name: "Ensure install directory {{ stroom_home_dir }} exists"
       file:
         path: "{{ stroom_home_dir }}"
         state: directory
 
-    - name: Unpack Stroom's distribution zip
+    - name: "Unpack Stroom's distribution zip to {{ stroom_home_dir }}"
       unarchive:
         src: "{{ downloads_dir }}/{{ stroom_archive_filename }}"
         dest:  "{{ stroom_home_dir }}"
         remote_src: true
 
-    - name: Ensure logs directory exists
+    - name: "Ensure logs directory {{ stroom_home_dir }}/logs exists"
       file:
         path:  "{{ stroom_home_dir }}/logs"
         state: directory
