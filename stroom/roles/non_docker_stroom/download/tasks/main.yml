@@ -42,6 +42,11 @@
         path: "{{ stroom_home_dir }}"
         state: directory
 
+    - name: Install unzip
+      package:
+        name: unzip
+        state: present
+
     - name: "Unpack Stroom's distribution zip to {{ stroom_home_dir }}"
       unarchive:
         src: "{{ downloads_dir }}/{{ stroom_archive_filename }}"
