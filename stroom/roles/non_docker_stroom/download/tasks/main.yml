@@ -47,6 +47,11 @@
         name: unzip
         state: present
 
+    - name: "Ensure directory {{ stroom_home_dir }}/{{ stroom_version }} exists"
+      file:
+        path: "{{ stroom_home_dir }}/{{ stroom_version }}"
+        state: directory
+
     - name: "Unpack Stroom's distribution zip to {{ stroom_home_dir }}/{{ stroom_version }}"
       unarchive:
         src: "{{ downloads_dir }}/{{ stroom_archive_filename }}"
