@@ -7,6 +7,7 @@
       - stroom_archive_filename is defined
       - stroom_install_root_dir is defined
       - stroom_url is defined
+      - stroom_home_dir  is defined
 
 - debug:
     msg:
