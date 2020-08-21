@@ -16,13 +16,13 @@
       - "stroom_url: {{ stroom_url }}"
     verbosity: 2
 
-- name: "See if {{ stroom_home_dir }}/bin exists"
+- name: "See if {{ stroom_home_dir }}/{{ stroom_version }}/bin exists"
   stat:
-    path: "{{ stroom_home_dir }}"
-  register: _stroom_home_bin_dir_info
+    path: "{{ stroom_home_dir }}/{{ stroom_version }}/bin"
+  register: _stroom_home_v_bin_dir_info
 
 - name: "Download archive {{ _stroom_stack_archive_url }}" 
-  when: _stroom_home_dir_info.stat.exists == false
+  when: _stroom_home_v_bin_dir_info.stat.exists == false
   block:
 
     - name: "Ensure directory {{ downloads_dir }} exists"
@@ -47,10 +47,10 @@
         name: unzip
         state: present
 
-    - name: "Unpack Stroom's distribution zip to {{ stroom_home_dir }}"
+    - name: "Unpack Stroom's distribution zip to {{ stroom_home_dir }}/{{ stroom_version }}"
       unarchive:
         src: "{{ downloads_dir }}/{{ stroom_archive_filename }}"
-        dest:  "{{ stroom_home_dir }}"
+        dest:  "{{ stroom_home_dir }}/{{ stroom_version }}"
         remote_src: true
 
     - name: "Ensure logs directory {{ stroom_home_dir }}/logs exists"
